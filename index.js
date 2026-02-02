@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const router = require ('./routes/index');
 
-const { dbConnection } = require('./config/config');
-dbConnection()
+const PORT = process.env.MONGO_URI || 3002
+require ('dotenv').config()
 
+
+app.use (express.json())
+app.use (router)
 
 app.listen(PORT, () => console.log(`El servidor está escuchando en el puerto http://localhost:${PORT}`));
